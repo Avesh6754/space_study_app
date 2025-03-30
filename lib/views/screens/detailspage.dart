@@ -7,9 +7,7 @@ import 'package:space_study_app/modal/spacemodal.dart';
 import 'package:space_study_app/provider/home_provider.dart';
 
 class DetailsPage extends StatefulWidget {
-   DetailsPage({super.key});
-
-
+  DetailsPage({super.key});
 
   @override
   State<DetailsPage> createState() => _DetailsPageState();
@@ -52,33 +50,165 @@ class _DetailsPageState extends State<DetailsPage> {
             fit: BoxFit.cover,
           ),
         ),
-        child:SafeArea(
+        child: SafeArea(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FutureBuilder(
-                future:
-                Future.delayed(Duration(milliseconds: 1500)),
-                builder: (context, snapshot) {
-                  return Positioned(
-                      top: -50,
-                      left: 50,
-                      child: Image.asset(
-                       context.watch<HomeProvider>().solarSystemList[context.watch<HomeProvider>().seletcedindex].image,
-                        width: 350,
-                        height:350,
-                      )
-                          .animate()
-                          .slideY(
-                          begin: 2.0,
-                          end: 0,
-                          duration: 1700.ms)
-                          .fadeIn(duration: 1200.ms)
-                          .flipInY(duration: 1500.ms));
-                },
+              Expanded(
+                flex: 3,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    FutureBuilder(
+                      future: Future.delayed(Duration(milliseconds: 50)),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          return Image.asset(
+                            context
+                                .watch<HomeProvider>()
+                                .solarSystemList[
+                                    context.watch<HomeProvider>().seletcedindex]
+                                .image,
+                            width: 300,
+                            height: 300,
+                          )
+                              .animate()
+                              .slideY(begin: 2.0, end: 0, duration: 1700.ms)
+                              .fadeIn(duration: 1200.ms)
+                              .flipInY(duration: 1500.ms);
+                        }
+                        return SizedBox();
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ],
+          Expanded(
+            flex: 3,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      context.watch<HomeProvider>().solarSystemList[
+                      context.watch<HomeProvider>().seletcedindex].name,
+                      style: GoogleFonts.orbitron(
+                        textStyle: TextStyle(
+                          color: Color(0xFF66FCF1),
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 2,
+                        ),
+                      ),
+                    ).animate()
+                        .slideX(begin: 1.0, end: 0, duration: 1000.ms)
+                        .fadeIn(duration: 800.ms)
+                        .flipX(duration: 1000.ms),
+
+                    SizedBox(height: 10),
+                    Divider(color: Colors.white70, thickness: 1.5),
+                    SizedBox(height: 10),
+
+                    detailRow("Type", context.watch<HomeProvider>()
+                        .solarSystemList[context.watch<HomeProvider>().seletcedindex].type)
+                        .animate()
+                        .slideY(begin: 2.0, end: 0, duration: 1000.ms)
+                        .fadeIn(duration: 600.ms)
+                        .flip(duration: 800.ms)
+                       ,
+
+                    detailRow("Composition", context.watch<HomeProvider>()
+                        .solarSystemList[context.watch<HomeProvider>().seletcedindex].composition)
+                        .animate()
+                        .slideX(begin: 2.0, end: 0, duration: 1000.ms)
+                        .fadeIn(duration: 600.ms)
+                        .flipY(duration: 800.ms)
+                        ,
+
+                    detailRow("Diameter (km)", context.watch<HomeProvider>()
+                        .solarSystemList[context.watch<HomeProvider>().seletcedindex].diameterKm.toString())
+                        .animate()
+                        .slideX(begin: 2.0, end: 0, duration: 1000.ms)
+                        .fadeIn(duration: 600.ms)
+                        .flipV(duration: 800.ms)
+                        ,
+
+                    detailRow("Mass (kg)", context.watch<HomeProvider>()
+                        .solarSystemList[context.watch<HomeProvider>().seletcedindex].massKg.toString())
+                        .animate()
+                        .slideX(begin: 2.0, end: 0, duration: 1000.ms)
+                        .fadeIn(duration: 600.ms)
+                        .flipX(duration: 800.ms)
+                        ,
+
+                    detailRow("Orbital Period (Days)", context.watch<HomeProvider>()
+                        .solarSystemList[context.watch<HomeProvider>().seletcedindex].orbitalPeriodDays.toString())
+                        .animate()
+                        .slideX(begin: 2.0, end: 0, duration: 1000.ms)
+                        .fadeIn(duration: 600.ms)
+                        .flip(duration: 800.ms)
+                        ,
+
+                    detailRow("Orbital Period (Years)", context.watch<HomeProvider>()
+                        .solarSystemList[context.watch<HomeProvider>().seletcedindex].orbitalPeriodYears.toString())
+                        .animate()
+                        .slideX(begin: 2.0, end: 0, duration: 1000.ms)
+                        .fadeIn(duration: 600.ms)
+                        .flipY(duration: 800.ms)
+                        ,
+                  ],
+                ),
+              ),
+            ),
+          )
+
+          ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget detailRow(String title, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            // Allows text to wrap if needed
+            child: Text(
+              title + ":",
+              style: GoogleFonts.orbitron(
+                textStyle: TextStyle(
+                  color: Colors.white70,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              overflow: TextOverflow.ellipsis, // Prevents overflow
+              maxLines: 2, // Keeps text in a single line
+            ),
+          ),
+          Expanded(
+            child: Text(
+              value,
+              style: GoogleFonts.orbitron(
+                textStyle: TextStyle(
+                  color: Color(0xFF66FCF1),
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              overflow: TextOverflow.ellipsis, // Prevents overflow
+              maxLines: 1, // Keeps text in a single line
+              textAlign: TextAlign.right, // Aligns the value text to the right
+            ),
+          ),
+        ],
       ),
     );
   }

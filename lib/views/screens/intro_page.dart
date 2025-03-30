@@ -2,6 +2,8 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:space_study_app/provider/home_provider.dart';
 import 'package:space_study_app/views/screens/homepage.dart';
 
 class IntroPage extends StatefulWidget {
@@ -88,6 +90,7 @@ class _IntroPageState extends State<IntroPage> {
 
                 ElevatedButton(
                   onPressed: () {
+                    context.read<HomeProvider>().login(true);
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (context) => FadeInLeft(
                         animate: true,
