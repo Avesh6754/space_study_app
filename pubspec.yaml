@@ -39,6 +39,7 @@ dependencies:
   google_fonts: ^6.2.1
   animate_do: ^4.2.0
   shared_preferences: any
+  hero_animation: ^1.1.4
 
 dev_dependencies:
   flutter_test:

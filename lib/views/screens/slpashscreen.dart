@@ -4,6 +4,10 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hero_animation/hero_animation.dart';
+import 'package:provider/provider.dart';
+import 'package:space_study_app/provider/home_provider.dart';
+import 'package:space_study_app/views/screens/homepage.dart';
 import 'package:space_study_app/views/screens/intro_page.dart';
 
 var time = 0;
@@ -23,25 +27,31 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     _timer = Timer.periodic(
       Duration(seconds: 3),
-          (timer) {
+      (timer) {
         setState(() {
           if (mounted) {
             setState(() {
               time = timer.tick;
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => FadeInLeft(
-                  animate: true,
-                  duration: Duration(milliseconds: 100),
-                  child: IntroPage(),
-                  onFinish: (direction) => IntroPage(),
-                ),
-              ));
-            });
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return (context.watch<HomeProvider>().isLoggedIn)
+                          ? Homepage().animate().flipInX(
+                        duration: 2000.ms,
+                      )
+                          : IntroPage().animate().flipInY(
+                        duration: 2000.ms,
+                      );
+                    },
+                  ));
+
+              });
           }
         });
       },
     );
   }
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -58,7 +68,8 @@ class _SplashScreenState extends State<SplashScreen> {
           width: double.infinity,
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Color(0xFF000428), Color(0xFF004e92)], // Deep space blue gradient
+              colors: [Color(0xFF000428), Color(0xFF004e92)],
+              // Deep space blue gradient
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
@@ -82,8 +93,8 @@ class _SplashScreenState extends State<SplashScreen> {
           )
               .animate()
               .flipV(
-            duration: 1500.ms,
-          )
+                duration: 1500.ms,
+              )
               .scale(),
         ),
       ),

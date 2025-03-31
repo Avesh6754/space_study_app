@@ -7,9 +7,9 @@ import '../utils/global.dart';
 class HomeProvider extends ChangeNotifier {
   List<SolarSystem> solarSystemList = [];
   int seletcedindex = 0;
-  bool isLogged = false;
+  bool _isLogged = false;
 
-  bool get isLoggedIn => isLogged;
+  bool get isLoggedIn => _isLogged;
 
   void fetchSolarData() {
     solarSystemList = solarSystem
@@ -37,7 +37,7 @@ class HomeProvider extends ChangeNotifier {
 
   Future<void> _loadUserData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    isLogged = prefs.getBool('login') ?? false;
+    _isLogged = prefs.getBool('login') ?? false;
     notifyListeners();
   }
 }

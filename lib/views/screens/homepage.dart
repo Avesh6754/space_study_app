@@ -198,145 +198,148 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
 
 
 
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Stack(
-                          clipBehavior: Clip.none,
-                          children: [
-                            // First animate the container
-                            FutureBuilder(
-                              future:
-                                  Future.delayed(Duration(milliseconds: 100)),
-                              // Delay before next animation
-                              builder: (context, snapshot) {
-                                return Container(
-                                  height: 300,
-                                  width: 200,
-                                  decoration: BoxDecoration(
-                                    color: Colors.black38,
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                  alignment: Alignment.bottomLeft,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 20, bottom: 20),
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          context.watch<HomeProvider>().solarSystemList[index].name,
-                                          style: GoogleFonts.orbitron(
-                                            textStyle: TextStyle(
-                                                color: Color(0xFF66FCF1),
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        Text(
-                                          context.watch<HomeProvider>().solarSystemList[index].type,
-                                          style: GoogleFonts.orbitron(
-                                            textStyle: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        Text(
-                                          'Diameter : ${context.watch<HomeProvider>().solarSystemList[index].diameterKm.toString()}',
-                                          style: GoogleFonts.orbitron(
-                                            textStyle: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        Text(
-                                          'Gravity : ${context.watch<HomeProvider>().solarSystemList[index].gravityMs2.toString()}',
-                                          style: GoogleFonts.orbitron(
-                                            textStyle: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        SizedBox(height: 12),
-                                        // Spacing between text and button
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            context.read<HomeProvider>().changeIndex(index);
-                                            Navigator.of(context).push(MaterialPageRoute(
-                                              builder: (context) => FadeInLeft(
-                                                animate: true,
-                                                duration: Duration(milliseconds: 100),
-                                                child: DetailsPage(),
-                                                onFinish: (direction) => DetailsPage(),
-                                              ),
-                                            ));
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.transparent,
-                                            // Transparent Button
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              // Rounded Button
-                                              side: BorderSide(
-                                                  color: Color(0xFF66FCF1),
-                                                  width: 1.5), // White Border
-                                            ),
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 24, vertical: 10),
-                                            // Button Padding
-                                            elevation: 2, // Slight Elevation
-                                          ),
-                                          child: Text(
-                                            'Explore',
-                                            style: TextStyle(
-                                              color: Color(0xFF66FCF1),
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Stack(
+                            clipBehavior: Clip.none,
+                            children: [
+                              // First animate the container
+                              FutureBuilder(
+                                future:
+                                    Future.delayed(Duration(milliseconds: 100)),
+                                // Delay before next animation
+                                builder: (context, snapshot) {
+                                  return Container(
+                                    height: 300,
+                                    width: 200,
+                                    decoration: BoxDecoration(
+                                      color: Colors.black38,
+                                      borderRadius: BorderRadius.circular(25),
                                     ),
-                                  ),
-                                )
-                                    .animate()
-                                    .slideX(
-                                        begin: 2.0, end: 0, duration: 1700.ms)
-                                    .fadeIn(duration: 1200.ms)
-                                    .flipInX(duration: 1500.ms);
-                              },
-                            ),
-                            FutureBuilder(
-                              future:
-                                  Future.delayed(Duration(milliseconds: 1500)),
-                              builder: (context, snapshot) {
-                                return Positioned(
-                                    top: -50,
-                                    left: 50,
-                                    child: Image.asset(
-                                      context.watch<HomeProvider>().solarSystemList[index].image,
-                                      width: 160,
-                                      height: 160,
-                                    )
-                                        .animate()
-                                        .slideY(
-                                            begin: 2.0,
-                                            end: 0,
-                                            duration: 1700.ms)
-                                        .fadeIn(duration: 1200.ms)
-                                        .flipInY(duration: 1500.ms));
-                              },
-                            ),
-                          ],
-                        ),
-                        SizedBox(width: 20),
-                      ],
+                                    alignment: Alignment.bottomLeft,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 20, bottom: 20),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            context.watch<HomeProvider>().solarSystemList[index].name,
+                                            style: GoogleFonts.orbitron(
+                                              textStyle: TextStyle(
+                                                  color: Color(0xFF66FCF1),
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Text(
+                                            context.watch<HomeProvider>().solarSystemList[index].type,
+                                            style: GoogleFonts.orbitron(
+                                              textStyle: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Text(
+                                            'Diameter : ${context.watch<HomeProvider>().solarSystemList[index].diameterKm.toString()}',
+                                            style: GoogleFonts.orbitron(
+                                              textStyle: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Text(
+                                            'Gravity : ${context.watch<HomeProvider>().solarSystemList[index].gravityMs2.toString()}',
+                                            style: GoogleFonts.orbitron(
+                                              textStyle: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          SizedBox(height: 12),
+                                          // Spacing between text and button
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              context.read<HomeProvider>().changeIndex(index);
+                                              Navigator.of(context).push(MaterialPageRoute(
+                                                builder: (context) => DetailsPage().animate().flipV(
+                                                duration: 2000.ms,
+                                              ),
+                                              ));
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: Colors.transparent,
+                                              // Transparent Button
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                // Rounded Button
+                                                side: BorderSide(
+                                                    color: Color(0xFF66FCF1),
+                                                    width: 1.5), // White Border
+                                              ),
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 24, vertical: 10),
+                                              // Button Padding
+                                              elevation: 2, // Slight Elevation
+                                            ),
+                                            child: Text(
+                                              'Explore',
+                                              style: TextStyle(
+                                                color: Color(0xFF66FCF1),
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          )..animate()
+                                              .flipInY(
+                                            duration: 2000.ms,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                      .animate()
+                                      .slideX(
+                                          begin: 2.0, end: 0, duration: 1700.ms)
+                                      .fadeIn(duration: 1200.ms)
+                                      .flipInX(duration: 1500.ms);
+                                },
+                              ),
+                              FutureBuilder(
+                                future:
+                                    Future.delayed(Duration(milliseconds: 1500)),
+                                builder: (context, snapshot) {
+                                  return Positioned(
+                                      top: -50,
+                                      left: 50,
+                                      child: Image.asset(
+                                        context.watch<HomeProvider>().solarSystemList[index].image,
+                                        width: 160,
+                                        height: 160,
+                                      )
+                                          .animate()
+                                          .slideY(
+                                              begin: 2.0,
+                                              end: 0,
+                                              duration: 1700.ms)
+                                          .fadeIn(duration: 1200.ms)
+                                          .flipInY(duration: 1500.ms));
+                                },
+                              ),
+                            ],
+                          ),
+                          SizedBox(width: 20),
+                        ],
+                      ),
                     );
                   },
                 ),

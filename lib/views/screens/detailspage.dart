@@ -204,7 +204,7 @@ class _DetailsPageState extends State<DetailsPage> {
                 ),
               ),
               overflow: TextOverflow.ellipsis, // Prevents overflow
-              maxLines: 1, // Keeps text in a single line
+              maxLines: 2, // Keeps text in a single line
               textAlign: TextAlign.right, // Aligns the value text to the right
             ),
           ),

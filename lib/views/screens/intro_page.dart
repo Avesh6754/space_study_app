@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hero_animation/hero_animation.dart';
 import 'package:provider/provider.dart';
 import 'package:space_study_app/provider/home_provider.dart';
 import 'package:space_study_app/views/screens/homepage.dart';
@@ -91,14 +92,13 @@ class _IntroPageState extends State<IntroPage> {
                 ElevatedButton(
                   onPressed: () {
                     context.read<HomeProvider>().login(true);
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => FadeInLeft(
-                        animate: true,
-                        duration: Duration(milliseconds: 100),
-                        child: Homepage(),
-                        onFinish: (direction) => Homepage(),
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                          builder: (context) => Homepage()..animate().flipInX(
+                            duration: 2000.ms,
+                          )
                       ),
-                    ));
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFFE63946), // Nebula Red
