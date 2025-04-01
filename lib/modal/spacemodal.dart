@@ -8,7 +8,7 @@ class SolarSystem {
   final dynamic gravityMs2;
   final String composition;
   final String image;
-  final int? orbitalPeriodDays;
+  final dynamic? orbitalPeriodDays;
   final double? orbitalPeriodYears;
   final List<Moon>? moons;
 
@@ -29,7 +29,7 @@ class SolarSystem {
   factory SolarSystem.fromJson(Map json) {
     return SolarSystem(
       name: json['name'],
-      type: json['type'],
+      type: json['type']??null,
       description: json['description'],
       diameterKm: json['diameter_km'],
       massKg: json['mass_kg'],

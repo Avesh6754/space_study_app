@@ -47,10 +47,25 @@ final List<Map<String, dynamic>> solarSystem = [
     "gravity_m_s2": 9.81,
     "composition": "Nitrogen (78%), Oxygen (21%), Others (1%)",
     "moons": [
-      {"name": "Moon", "diameter_km": 3474, "gravity_m_s2": 1.62, "description": "Earth’s only natural satellite, affecting tides and stabilizing the planet’s axis.", "image": "assets/image/moon.gif"}
     ],
     "image": "assets/image/earth.gif"
   },
+  {
+    "name": "Moon",
+    "type": "Planet",
+    "diameter_km": 3474,
+    "gravity_m_s2": 1.62,
+    "mass_kg": 7.35e22,
+    "distance_from_earth_km": 384400,
+    "orbital_period_days": 27.3,
+    "orbital_period_years": 1.0,
+    "temperature_min_c": -173,
+    "temperature_max_c": 127,
+    "composition": "Regolith, Basalt, Plagioclase",
+    "description": "Earth’s only natural satellite, affecting tides and stabilizing the planet’s axis.",
+    "image": "assets/image/moon.gif"
+  }
+,
   {
     "name": "Mars",
     "type": "Planet",
@@ -62,11 +77,24 @@ final List<Map<String, dynamic>> solarSystem = [
     "gravity_m_s2": 3.71,
     "composition": "Carbon dioxide (95.3%), Nitrogen (2.7%)",
     "moons": [
-      {"name": "Phobos", "diameter_km": 22.4, "gravity_m_s2": 0.0057, "description": "One of Mars’ two small moons, likely captured asteroids.", "image": "assets/image/phobos.png"},
-      {"name": "Deimos", "diameter_km": 12.4, "gravity_m_s2": 0.003, "description": "The smaller of Mars’ moons, with an irregular shape.", "image": "assets/image/deimos.png"}
+      {
+        "name": "Phobos",
+        "diameter_km": 22.4,
+        "gravity_m_s2": 0.0057,
+        "description": "One of Mars’ two small moons, likely captured asteroids.",
+        "image": "assets/image/phobos.png"
+      },
+      {
+        "name": "Deimos",
+        "diameter_km": 12.4,
+        "gravity_m_s2": 0.003,
+        "description": "The smaller of Mars’ moons, with an irregular shape.",
+        "image": "assets/image/deimos.png"
+      }
     ],
     "image": "assets/image/mars.gif"
   },
+
   {
     "name": "Jupiter",
     "type": "Planet",
@@ -78,8 +106,20 @@ final List<Map<String, dynamic>> solarSystem = [
     "gravity_m_s2": 24.79,
     "composition": "Hydrogen (89%), Helium (10%)",
     "moons": [
-      {"name": "Io", "diameter_km": 3643, "gravity_m_s2": 1.8, "description": "The most volcanically active body in the solar system.", "image": "assets/image/io.png"},
-      {"name": "Europa", "diameter_km": 3122, "gravity_m_s2": 1.31, "description": "An ice-covered moon with a subsurface ocean that may harbor life.", "image": "assets/image/europa.png"}
+      {
+        "name": "Io",
+        "diameter_km": 3643,
+        "gravity_m_s2": 1.8,
+        "description": "The most volcanically active body in the solar system.",
+        "image": "assets/image/io.png"
+      },
+      {
+        "name": "Europa",
+        "diameter_km": 3122,
+        "gravity_m_s2": 1.31,
+        "description": "An ice-covered moon with a subsurface ocean that may harbor life.",
+        "image": "assets/image/europa.png"
+      }
     ],
     "image": "assets/image/jupiter.gif"
   },
@@ -94,7 +134,13 @@ final List<Map<String, dynamic>> solarSystem = [
     "gravity_m_s2": 10.44,
     "composition": "Hydrogen (96%), Helium (3%)",
     "moons": [
-      {"name": "Titan", "diameter_km": 5150, "gravity_m_s2": 1.352, "description": "The only moon with a thick atmosphere and liquid methane lakes.", "image": "assets/image/titan.png"}
+      {
+        "name": "Titan",
+        "diameter_km": 5150,
+        "gravity_m_s2": 1.352,
+        "description": "The only moon with a thick atmosphere and liquid methane lakes.",
+        "image": "assets/image/titan.png"
+      }
     ],
     "image": "assets/image/saturn.gif"
   },
@@ -121,7 +167,13 @@ final List<Map<String, dynamic>> solarSystem = [
     "gravity_m_s2": 11.15,
     "composition": "Hydrogen (80%), Helium (19%), Methane (1%)",
     "moons": [
-      {"name": "Triton", "diameter_km": 2707, "gravity_m_s2": 0.779, "description": "Neptune’s largest moon, with geysers that shoot nitrogen gas into space.", "image": "assets/image/triton.png"}
+      {
+        "name": "Triton",
+        "diameter_km": 2707,
+        "gravity_m_s2": 0.779,
+        "description": "Neptune’s largest moon, with geysers that shoot nitrogen gas into space.",
+        "image": "assets/image/triton.png"
+      }
     ],
     "image": "assets/image/neptune.gif"
   }

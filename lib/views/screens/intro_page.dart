@@ -94,7 +94,7 @@ class _IntroPageState extends State<IntroPage> {
                     context.read<HomeProvider>().login(true);
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                          builder: (context) => Homepage()..animate().flipInX(
+                          builder: (context) => Homepage().animate().flipX(
                             duration: 2000.ms,
                           )
                       ),

@@ -16,6 +16,8 @@ class DetailsPage extends StatefulWidget {
 class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
+    PageController pageController =
+    PageController(initialPage: context.watch<HomeProvider>().seletcedindex);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -51,123 +53,107 @@ class _DetailsPageState extends State<DetailsPage> {
           ),
         ),
         child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                flex: 3,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    FutureBuilder(
-                      future: Future.delayed(Duration(milliseconds: 50)),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          return Image.asset(
-                            context
-                                .watch<HomeProvider>()
-                                .solarSystemList[
-                                    context.watch<HomeProvider>().seletcedindex]
-                                .image,
-                            width: 300,
-                            height: 300,
+          child: PageView(
+            controller: pageController,
+            children: context
+                .watch<HomeProvider>()
+                .solarSystemList
+                .map((planet) => Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      FutureBuilder(
+                        future: Future.delayed(Duration(milliseconds: 50)),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.done) {
+                            return Image.asset(
+                              planet.image,
+                              width: 300,
+                              height: 300,
+                            )
+                                .animate()
+                                .slideUp( duration: 1700.ms)
+                                .fadeIn(duration: 1200.ms)
+                                .flipInY(duration: 1500.ms);
+                          }
+                          return SizedBox();
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            planet.name,
+                            style: GoogleFonts.orbitron(
+                              textStyle: TextStyle(
+                                color: Color(0xFF66FCF1),
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 2,
+                              ),
+                            ),
                           )
                               .animate()
-                              .slideY(begin: 2.0, end: 0, duration: 1700.ms)
-                              .fadeIn(duration: 1200.ms)
-                              .flipInY(duration: 1500.ms);
-                        }
-                        return SizedBox();
-                      },
-                    ),
-                  ],
-                ),
-              ),
-          Expanded(
-            flex: 3,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      context.watch<HomeProvider>().solarSystemList[
-                      context.watch<HomeProvider>().seletcedindex].name,
-                      style: GoogleFonts.orbitron(
-                        textStyle: TextStyle(
-                          color: Color(0xFF66FCF1),
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 2,
-                        ),
+                              .slideX(begin: 1.0, end: 0, duration: 1000.ms)
+                              .fadeIn(duration: 800.ms)
+                              .flipX(duration: 1000.ms),
+                          SizedBox(height: 10),
+                          Divider(color: Colors.white70, thickness: 1.5),
+                          SizedBox(height: 10),
+                          detailRow("Type", planet.type)
+                              .animate()
+                              .slideY(begin: 2.0, end: 0, duration: 1000.ms)
+                              .fadeIn(duration: 600.ms)
+                              .flip(duration: 800.ms),
+                          detailRow("Composition", planet.composition)
+                              .animate()
+                              .slideX(begin: 2.0, end: 0, duration: 1000.ms)
+                              .fadeIn(duration: 600.ms)
+                              .flipY(duration: 800.ms),
+                          detailRow("Diameter (km)", planet.diameterKm.toString())
+                              .animate()
+                              .slideX(begin: 2.0, end: 0, duration: 1000.ms)
+                              .fadeIn(duration: 600.ms)
+                              .flipV(duration: 800.ms),
+                          detailRow("Mass (kg)", planet.massKg.toString())
+                              .animate()
+                              .slideX(begin: 2.0, end: 0, duration: 1000.ms)
+                              .fadeIn(duration: 600.ms)
+                              .flipX(duration: 800.ms),
+                          detailRow("Orbital Period (Days)", planet.orbitalPeriodDays.toString())
+                              .animate()
+                              .slideX(begin: 2.0, end: 0, duration: 1000.ms)
+                              .fadeIn(duration: 600.ms)
+                              .flip(duration: 800.ms),
+                          detailRow("Orbital Period (Years)", planet.orbitalPeriodYears.toString())
+                              .animate()
+                              .slideX(begin: 2.0, end: 0, duration: 1000.ms)
+                              .fadeIn(duration: 600.ms)
+                              .flipY(duration: 800.ms),
+                        ],
                       ),
-                    ).animate()
-                        .slideX(begin: 1.0, end: 0, duration: 1000.ms)
-                        .fadeIn(duration: 800.ms)
-                        .flipX(duration: 1000.ms),
-
-                    SizedBox(height: 10),
-                    Divider(color: Colors.white70, thickness: 1.5),
-                    SizedBox(height: 10),
-
-                    detailRow("Type", context.watch<HomeProvider>()
-                        .solarSystemList[context.watch<HomeProvider>().seletcedindex].type)
-                        .animate()
-                        .slideY(begin: 2.0, end: 0, duration: 1000.ms)
-                        .fadeIn(duration: 600.ms)
-                        .flip(duration: 800.ms)
-                       ,
-
-                    detailRow("Composition", context.watch<HomeProvider>()
-                        .solarSystemList[context.watch<HomeProvider>().seletcedindex].composition)
-                        .animate()
-                        .slideX(begin: 2.0, end: 0, duration: 1000.ms)
-                        .fadeIn(duration: 600.ms)
-                        .flipY(duration: 800.ms)
-                        ,
-
-                    detailRow("Diameter (km)", context.watch<HomeProvider>()
-                        .solarSystemList[context.watch<HomeProvider>().seletcedindex].diameterKm.toString())
-                        .animate()
-                        .slideX(begin: 2.0, end: 0, duration: 1000.ms)
-                        .fadeIn(duration: 600.ms)
-                        .flipV(duration: 800.ms)
-                        ,
-
-                    detailRow("Mass (kg)", context.watch<HomeProvider>()
-                        .solarSystemList[context.watch<HomeProvider>().seletcedindex].massKg.toString())
-                        .animate()
-                        .slideX(begin: 2.0, end: 0, duration: 1000.ms)
-                        .fadeIn(duration: 600.ms)
-                        .flipX(duration: 800.ms)
-                        ,
-
-                    detailRow("Orbital Period (Days)", context.watch<HomeProvider>()
-                        .solarSystemList[context.watch<HomeProvider>().seletcedindex].orbitalPeriodDays.toString())
-                        .animate()
-                        .slideX(begin: 2.0, end: 0, duration: 1000.ms)
-                        .fadeIn(duration: 600.ms)
-                        .flip(duration: 800.ms)
-                        ,
-
-                    detailRow("Orbital Period (Years)", context.watch<HomeProvider>()
-                        .solarSystemList[context.watch<HomeProvider>().seletcedindex].orbitalPeriodYears.toString())
-                        .animate()
-                        .slideX(begin: 2.0, end: 0, duration: 1000.ms)
-                        .fadeIn(duration: 600.ms)
-                        .flipY(duration: 800.ms)
-                        ,
-                  ],
-                ),
-              ),
-            ),
-          )
-
-          ],
+                    ),
+                  ),
+                )
+              ],
+            ))
+                .toList(),
           ),
-        ),
+        )
+
       ),
     );
   }
